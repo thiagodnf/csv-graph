@@ -1,7 +1,9 @@
 # CSV Graph
  Use this tool to visualize csv files as charts
 
-To access:
+## Usage
+
+To visualize this tool, please access:
 
 https://thiagodnf.github.io/csv-graph
 
