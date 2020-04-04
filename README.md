@@ -1,5 +1,6 @@
-# COVID-19 Simulation
- 
+# CSV Graph
+ Use this tool to visualize csv files as charts
+
 To access:
 
-http://thiagodnf.github.io/covid-19-simulation
+http://thiagodnf.github.io/csv-graph
