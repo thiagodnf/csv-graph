@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>CSV Graph</title>
+		<meta name="author" content="Thiago Ferreira">
+		<meta name="description" content="Use this tool to visualize csv files as charts">
+		<meta name="keywords" content="csv,csv-chart,chart">
+		<meta name="robots" content="index, follow">
+        <!-- Vendors -->
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+        <!-- Custom -->
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </head>
+	<body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#">CSV Graph</a>
+            </nav>
+        </header>
+        <main>
+            <div class="container-fluid">
+
+                <div class="message-box"></div>
+
+                <div class="card" id="panel-input">
+                    <div class="card-header"><strong>Step 1:</strong> Select your input</div>
+                    <div class="card-body">
+                        <form action="#" method="GET" id="form-input">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="input-type" id="paste-textarea" value="paste-textarea" checked>
+                                    <label class="form-check-label" for="paste-textarea">Paste into textarea below</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="input-type" id="choose-file" value="choose-file">
+                                    <label class="form-check-label" for="choose-file">Choose a CSV file</label>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div id="input-paste-textarea">
+                                <div class="form-group">
+                                    <label for="editor">Type or paste the file's content</label>
+                                    <textarea class="form-control" id="editor" rows='8'></textarea>
+                                    <small id="emailHelp" class="form-text text-muted">
+                                        <a href="#" id="btn-add-example">Click here</a> for adding an example
+                                    </small>
+                                </div>
+                            </div>
+                            <div id="input-choose-file" style="display: none;">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <label for="encoding">Choose a file from your computer</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="file">
+                                                    <label class="custom-file-label" for="file">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="encoding">Encoding</label>
+                                            <select class="form-control" id="encoding">
+                                                <option value="ISO-8859-1">ISO-8859-1 (Latin No. 1)</option>
+                                                <option value="ISO-8859-2">ISO-8859-2 (Latin No. 2)</option>
+                                                <option value="ISO-8859-3">ISO-8859-3 (Latin No. 3)</option>
+                                                <option value="ISO-8859-4">ISO-8859-4 (Latin No. 4)</option>
+                                                <option value="ISO-8859-5">ISO-8859-5 (Latin/Cyrillic)</option>
+                                                <option value="ISO-8859-6">ISO-8859-6 (Latin/Arabic)</option>
+                                                <option value="ISO-8859-7">ISO-8859-7 (Latin/Greek)</option>
+                                                <option value="ISO-8859-8">ISO-8859-8 (Latin/Hebrew)</option>
+                                                <option value="ISO-8859-9">ISO-8859-9 (Latin No. 5)</option>
+                                                <option value="ISO-8859-13">ISO-8859-13 (Latin No. 7)</option>
+                                                <option value="ISO-8859-15">ISO-8859-15 (Latin No. 9)</option>
+                                                <option value="macintosh">Mac OS Roman</option>
+                                                <option value="UTF-8" selected="selected">UTF-8</option>
+                                                <option value="UTF-16">UTF-16</option>
+                                                <option value="UTF-16BE">UTF-16 (Big-Endian)</option>
+                                                <option value="UTF-16LE">UTF-16 (Little-Endian)</option>
+                                                <option value="UTF-32">UTF-32</option>
+                                                <option value="UTF-32BE">UTF-32 (Big-Endian)</option>
+                                                <option value="UTF-32LE">UTF-32 (Little-Endian)</option>
+                                                <option value="windows-1250">windows-1250 (Win East European)</option>
+                                                <option value="windows-1251">windows-1251 (WinCyrillic)</option>
+                                                <option value="windows-1252">windows-1252 (WinLatin-1)</option>
+                                                <option value="windows-1253">windows-1253 (WinGreek)</option>
+                                                <option value="windows-1254">windows-1254 (Win Turkish)</option>
+                                                <option value="windows-1255">windows-1255 (Win Hebrew)</option>
+                                                <option value="windows-1256">windows-1256 (Win Arabic)</option>
+                                                <option value="windows-1257">windows-1257 (Win Baltic)</option>
+                                                <option value="windows-1258">windows-1257 (Win Vietnamese)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <label for="separator">Separator</label>
+                                <select class="form-control" id="separator">
+                                    <option value="," checked>, (Comma)</option>
+                                    <option value=";">; (Semi-colon)</option>
+                                    <option value=":">: (colon)</option>
+                                    <option value=" ">(Space)</option>
+                                    <option value="\t">(Tab)</option>
+                                </select>
+                            </div>
+                            <button id="btn-generate" class="btn btn-primary">View Data</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4" id="panel-data" style="display: none;">
+                    <div class="card-header"><strong>Step 2:</strong> Visualize the data</div>
+                    <div class="card-body">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link active" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab">Data</a>
+                              <a class="nav-item nav-link" id="nav-columns-tab" data-toggle="tab" href="#nav-columns" role="tab">Columns</a>
+
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active mt-3" id="nav-data">
+
+                                <div class="table-responsive" style="height: 400px;">
+                                    <table id="table-result" class="table table-sm table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade mt-3" id="nav-columns">
+
+                                <div class="table-responsive">
+                                    <table id="table-columns" class="table table-sm table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Column</th>
+                                                <th>Active</th>
+                                                <th>Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" id="btn-generate-charts" class="btn btn-primary">Generate Charts</button>
+                        <button id="btn-back" class="btn btn-outline-secondary">Back</button>
+                    </div>
+                </div>
+
+
+
+
+                <div class="modal fade" id="modal-visualize-charts" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Visualize the charts</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="charts"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </main>
+
+        <!-- Vendors -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/modules/export-data.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Custom -->
+        <script type="text/javascript" src="js/script.js"></script>
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "name": "csv-graph",
+    "version": "1.0.0",
+    "description": "Use this tool to visualize csv files as charts",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
+        "dev": "nodemon index.js",
+        "lint": "./node_modules/.bin/eslint .",
+        "apidoc": "apidoc -i src/ -o docs/apidoc/"
+    },
+    "author": "Thiago Ferreira",
+    "license": "MIT",
+    "dependencies": {
+        "connect": "^3.6.6",
+        "livereload": "^0.9.1",
+        "network": "^0.4.1",
+        "serve-static": "^1.13.2",
+        "winston": "^2.4.2"
+    }
+}
